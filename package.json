@@ -1,0 +1,26 @@
+{
+  "name": "@pixelprodev/appstrap-web-ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "James LeClair <james@pixelpro.dev>",
+  "license": "ISC",
+  "repository": "https://github.com/pixelprodev/appstrap-web-ui",
+  "scripts": {
+    "test": "mocha --opts config/mocha/mocha.opts",
+    "build": "webpack --config config/webpack/production.config.js",
+    "storybook": "NODE_ENV=story start-storybook -p 9001 -c config/.storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@storybook/react": "^5.2.6",
+    "babel-loader": "^8.0.6",
+    "expect": "^24.9.0",
+    "mocha": "^6.2.2",
+    "standard": "^14.3.1",
+    "terser-webpack-plugin": "^2.2.1"
+  },
+  "dependencies": {}
+}

@@ -1,5 +1,5 @@
 module.exports = {
-  entry: ['@babel/polyfill', './src/Index.js'],
+  entry: ['@babel/polyfill', './src/index.jsx'],
   output: {
     filename: 'web-ui.js',
     publicPath: '/'

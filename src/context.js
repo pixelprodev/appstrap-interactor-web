@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from 'react'
 const InteractorContext = createContext({})
 
 export function InteractorContextProvider ({ children }) {
-  const [ status, setStatus ] = useState({})
+  const [ status, setStatus ] = useState({fixtures: [], routes: [], state: {}})
 
   useEffect(() => {
     getStatus()
@@ -27,12 +27,18 @@ export function InteractorContextProvider ({ children }) {
     await getStatus()
   }
 
-  async function toggleFixture () {
-
+  async function toggleFixture ({ name, current }) {
+    const endpoint = !current ? '/__interactor/activateFixture' : '/__interactor/deactivateFixture'
+    await fetch(endpoint, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ name })
+    })
+    await getStatus()
   }
 
   return (
-    <InteractorContext.Provider value={{ status, getStatus, setModifier }}>
+    <InteractorContext.Provider value={{ status, getStatus, setModifier, toggleFixture }}>
       { children }
     </InteractorContext.Provider>
   )

@@ -1,10 +1,10 @@
 {
-  "name": "@pixelprodev/appstrap-web-ui",
+  "name": "@appstrap/interactor-web",
   "version": "1.0.0",
   "main": "index.js",
   "author": "James LeClair <james@pixelpro.dev>",
   "license": "ISC",
-  "repository": "https://github.com/pixelprodev/appstrap-web-ui",
+  "repository": "https://github.com/pixelprodev/interactor-web",
   "scripts": {
     "test": "mocha --opts config/mocha/mocha.opts",
     "build": "webpack --config config/webpack/production.config.js",

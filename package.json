@@ -7,7 +7,7 @@
   "repository": "https://github.com/pixelprodev/interactor-web",
   "scripts": {
     "test": "mocha --opts config/mocha/mocha.opts",
-    "build": "webpack --config config/webpack/production.config.js",
+    "build": "webpack --config config/webpack/prod.config.js",
     "storybook": "NODE_ENV=story start-storybook -p 9001 -c config/.storybook"
   },
   "devDependencies": {
@@ -27,5 +27,10 @@
     "@emotion/styled": "^10.0.23",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
-  }
+  },
+  "files": [
+    "index.js",
+    "lib/interactor-web.js",
+    "lib/interactor-web-server.js"
+  ]
 }

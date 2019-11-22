@@ -1,7 +1,7 @@
 module.exports = {
   entry: ['@babel/polyfill', './src/index.jsx'],
   output: {
-    filename: 'web-ui.js',
+    filename: 'interactor-web.js',
     publicPath: '/'
   },
   resolve: {

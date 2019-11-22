@@ -7,11 +7,12 @@ const config = Object.assign({},
   baseConfig,
   {
     output: {
+      ...baseConfig.output,
       path: path.join(process.cwd(), './lib')
     },
     mode: 'production',
     optimization: {
-      minimizer: [new TerserPlugin()],
+      minimizer: [new TerserPlugin()]
     }
   }
 )

@@ -5,7 +5,7 @@ import AppstrapLogo from '../svg/AppstrapLogo'
 const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
-  padding: `0 30px`,
+  padding: '0 30px',
   height: 70,
   width: '100%',
   flexShrink: 0,

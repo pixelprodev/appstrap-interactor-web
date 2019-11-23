@@ -5,7 +5,8 @@ import Fixture from './Fixture'
 
 const Container = styled.div({
   minHeight: 150,
-  marginLeft: 30
+  marginLeft: 30,
+  marginBottom: 50
 })
 const Header = styled.div({
   display: 'flex',

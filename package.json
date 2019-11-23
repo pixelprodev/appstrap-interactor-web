@@ -8,6 +8,7 @@
   "scripts": {
     "test": "mocha --opts config/mocha/mocha.opts",
     "build": "webpack --config config/webpack/prod.config.js",
+    "prepublish": "npm run build",
     "storybook": "NODE_ENV=story start-storybook -p 9001 -c config/.storybook"
   },
   "devDependencies": {

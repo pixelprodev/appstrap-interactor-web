@@ -11,7 +11,18 @@ const Method = styled.span(({ type }) => ({
   fontSize: 14,
   lineHeight: '30px',
   fontWeight: 600,
-  textTransform: 'uppercase'
+  textTransform: 'uppercase',
+  color: type === 'get'
+    ? '#44C164'
+    : type === 'post'
+      ? '#2A9EF5'
+      : type === 'put'
+        ? '#A28D00'
+        : type === 'patch'
+          ? '#FF6812'
+          : type === 'delete'
+            ? '#FF0A19'
+            : null
 }))
 
 const Modifiers = styled.div({
@@ -28,7 +39,7 @@ const Modifier = styled.div({
 
 export default function Route (props) {
   const modifiers = [
-    <Method type={props.method}>{props.method}</Method>,
+    <Method type={props.method.toLowerCase()}>{props.method}</Method>,
     <ButtonToggle routeKey={props.id} property={'error'} active={props.error} activeColor={'#F00'}/>,
     <PropertyEntry routeKey={props.id} property={'errorCode'} value={props.errorCode} />,
     <ButtonToggle routeKey={props.id} property={'latency'} active={props.latency} activeColor={'#A28D00'}/>,

@@ -4,8 +4,13 @@ import styled from '@emotion/styled'
 import InteractorContext from '../../context'
 
 const Container = styled.div({
-  width: 100,
   height: 30,
+  '@media screen and (min-width: 1000px)': {
+    width: 100
+  },
+  '@media screen and (max-width: 1000px)': {
+    width: 'auto'
+  },
   ' input': {
     textAlign: 'center'
   }

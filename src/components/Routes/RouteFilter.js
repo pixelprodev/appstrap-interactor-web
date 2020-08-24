@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 
 const Container = styled.div({
   width: 300,
+  maxWidth: '60%',
   height: 36
 })
 

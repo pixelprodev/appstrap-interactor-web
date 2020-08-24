@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import InteractorContext from '../../context'
 
 const Button = styled.button(({active, activeColor}) => ({
-  width: 100,
   height: 30,
   borderRadius: 5,
   border: '1px solid #CCC',
@@ -14,7 +13,13 @@ const Button = styled.button(({active, activeColor}) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  '@media screen and (min-width: 1000px)': {
+    width: 100
+  },
+  '@media screen and (max-width: 1000px)': {
+    width: 'auto'
+  }
 }))
 
 export default function ButtonToggle ({ routeKey, property, active, activeColor }) {
@@ -28,7 +33,7 @@ export default function ButtonToggle ({ routeKey, property, active, activeColor 
       activeColor={activeColor}
       onClick={() => setModifier({ routeKey, property, value: !active })}
     >
-      {active ? 'Active' : 'Inactive'}
+      {active ? 'On' : 'Off'}
     </Button>
   )
 }

@@ -9,7 +9,6 @@ const Container = styled.div({
   height: 70,
   width: '100%',
   flexShrink: 0,
-  marginTop: 30,
   borderBottom: '1px solid #DFE2E5'
 })
 

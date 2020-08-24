@@ -20,7 +20,9 @@ const Header = styled.div({
     fontWeight: 600
   },
   ' input': {
-    width: 250
+    width: 250,
+    maxWidth: '60%',
+    marginRight: 10
   }
 })
 
@@ -39,7 +41,7 @@ export default function InactiveFixtures () {
     <Container>
       <Header>
         <span>Inactive</span>
-        <TextInput placeholder={'filter inactive fixtures'} onChange={(e) => setInactiveFilter(e.target.value)}/>
+        <TextInput placeholder={'filter inactive'} onChange={(e) => setInactiveFilter(e.target.value)}/>
       </Header>
       { filteredInactives.map(fixtureData => <Fixture key={fixtureData.name} {...fixtureData} />) }
     </Container>

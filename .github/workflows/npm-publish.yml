@@ -25,7 +25,6 @@ jobs:
           prerelease: false
 
   publish-npm:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -1,6 +1,6 @@
 {
   "name": "@appstrap/interactor-web",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "author": "James LeClair <james@pixelpro.dev>",
   "license": "ISC",
@@ -18,7 +18,8 @@
     "@storybook/react": "^5.3.19",
     "babel-loader": "^8.0.6",
     "standard": "^14.3.1",
-    "terser-webpack-plugin": "^2.2.1"
+    "terser-webpack-plugin": "^2.2.1",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",

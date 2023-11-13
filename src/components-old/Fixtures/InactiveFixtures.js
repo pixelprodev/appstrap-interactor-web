@@ -31,11 +31,11 @@ export default function InactiveFixtures () {
   const [ inactiveFilter, setInactiveFilter ] = useState('')
   const [ filteredInactives, setFilteredInactives ] = useState(status.fixtures.filter(f => !f.active ))
 
-  useEffect(() => {
-    const inactives = status.fixtures.filter(f => !f.active)
-    const filterExp = new RegExp(RegExp.escape(inactiveFilter), 'i')
-    setFilteredInactives(inactives.filter(f => filterExp.test(f.name)))
-  }, [status.fixtures, inactiveFilter])
+  // useEffect(() => {
+  //   const inactives = status.fixtures.filter(f => !f.active)
+  //   const filterExp = new RegExp(RegExp.escape(inactiveFilter), 'i')
+  //   setFilteredInactives(inactives.filter(f => filterExp.test(f.name)))
+  // }, [status.fixtures, inactiveFilter])
 
   return (
     <Container>

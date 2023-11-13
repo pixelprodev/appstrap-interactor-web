@@ -1,21 +1,28 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import {SectionHeader} from '../../styles/SharedStyles'
-import InactiveFixtures from './InactiveFixtures'
-import ActiveFixtures from './ActiveFixtures'
-
-const Container = styled.div({
-  width: '40%'
-})
+import { useContext, useState } from 'react'
+import InteractorContext from '../../context'
+import Section from '../common/Section'
+import FixtureNavigation from './Navigation'
+import FixtureContent from './Content'
 
 export default function Fixtures () {
+  const {fixtures} = useContext(InteractorContext)
+  const [selectedFixtureName, setSelectedFixtureName] = useState(fixtures[0].name)
+  
   return (
-    <Container>
-      <SectionHeader>
-        <h2>Fixtures</h2>
-      </SectionHeader>
-      <ActiveFixtures />
-      <InactiveFixtures />
-    </Container>
+    <Section
+      heading='Fixtures'
+      navigation={
+        <FixtureNavigation 
+          selectedFixtureName={selectedFixtureName}
+          update={setSelectedFixtureName}
+        />
+      }
+      content={
+        <FixtureContent
+          selectedFixture={fixtures.find(f => f.name === selectedFixtureName)}
+          update={setSelectedFixtureName}
+        />
+      }
+    />
   )
 }

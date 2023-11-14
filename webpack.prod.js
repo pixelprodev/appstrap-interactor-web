@@ -3,6 +3,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 const { devServer, ...commonConfig } = devConfig
 
+// all we are using at the moment is html plugin - shouldnt be part of the build
+delete commonConfig.plugins
+
 module.exports = {
   ...commonConfig,
   optimization: {
@@ -18,12 +21,5 @@ module.exports = {
         }
       })
     ]
-  },
-  plugins: [
-    new DefinePlugin({
-      'process.env': {
-        AWS_S3_BUCKET: JSON.stringify('launchpad--files--prod')
-      }
-    })
-  ]
+  }
 }

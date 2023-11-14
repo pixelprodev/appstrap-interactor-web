@@ -5,14 +5,15 @@ import FixtureNavigation from './Navigation'
 import FixtureContent from './Content'
 
 export default function Fixtures () {
-  const {fixtures} = useContext(InteractorContext)
+  const { fixtures } = useContext(InteractorContext)
+  if (fixtures && fixtures.length === 0) { return }
   const [selectedFixtureName, setSelectedFixtureName] = useState(fixtures[0].name)
   
   return (
     <Section
       heading='Fixtures'
       navigation={
-        <FixtureNavigation 
+        <FixtureNavigation
           selectedFixtureName={selectedFixtureName}
           update={setSelectedFixtureName}
         />

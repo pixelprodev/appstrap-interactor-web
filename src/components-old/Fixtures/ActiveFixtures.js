@@ -26,14 +26,14 @@ const NoFixtures = styled.span({
 
 export default function ActiveFixtures () {
   const { status } = useContext(InteractorContext)
-  const activeFixtures = status.fixtures.filter(f => f.active).sort((a, b) => a.order - b.order)
+  const activeFixtures = status.fixtures.filter(f => f.active)
   return (
     <Container>
       <Header>
         Active
       </Header>
-      { activeFixtures.length > 0 && activeFixtures.map(fixtureData => <Fixture key={fixtureData.name} {...fixtureData} />) }
-      { activeFixtures.length === 0 && <NoFixtures>No Active Fixtures</NoFixtures> }
+      {activeFixtures.length > 0 && activeFixtures.map(fixtureData => <Fixture key={fixtureData.name} {...fixtureData} />)}
+      {activeFixtures.length === 0 && <NoFixtures>No Active Fixtures</NoFixtures>}
     </Container>
   )
 }

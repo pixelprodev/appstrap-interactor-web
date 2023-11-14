@@ -8,8 +8,7 @@ const Container = styled.div({
   padding: '0 30px',
   height: 70,
   width: '100%',
-  flexShrink: 0,
-  borderBottom: '1px solid #DFE2E5'
+  flexShrink: 0
 })
 
 const Title = styled.span({

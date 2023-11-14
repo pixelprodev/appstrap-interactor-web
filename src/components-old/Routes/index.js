@@ -14,18 +14,18 @@ export default function Routes () {
   const { status: { routes = [] } } = useContext(InteractorContext)
   const [ routeFilter, setRouteFilter ] = useState('')
   const [ filteredRoutes, setFilteredRoutes ] = useState(routes)
-
-  useEffect(() => {
-    const filterExp = new RegExp(RegExp.escape(routeFilter), 'i')
-    const unsortedFilteredRoutes = routes.filter(r => filterExp.test(r.id))
-    const groupedRoutes = unsortedFilteredRoutes.reduce((groupedRoutes, r) => {
-      Array.isArray(groupedRoutes[r.path])
-        ? groupedRoutes[r.path].push(r)
-        : groupedRoutes[r.path] = [r]
-      return groupedRoutes
-    }, {})
-    setFilteredRoutes(groupedRoutes)
-  }, [routes, routeFilter])
+  //
+  // useEffect(() => {
+  //   const filterExp = new RegExp(RegExp.escape(routeFilter), 'i')
+  //   const unsortedFilteredRoutes = routes.filter(r => filterExp.test(r.id))
+  //   const groupedRoutes = unsortedFilteredRoutes.reduce((groupedRoutes, r) => {
+  //     Array.isArray(groupedRoutes[r.path])
+  //       ? groupedRoutes[r.path].push(r)
+  //       : groupedRoutes[r.path] = [r]
+  //     return groupedRoutes
+  //   }, {})
+  //   setFilteredRoutes(groupedRoutes)
+  // }, [routes, routeFilter])
 
   return (
     <Container>

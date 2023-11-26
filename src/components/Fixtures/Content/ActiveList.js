@@ -2,13 +2,12 @@ import styled from '@emotion/styled'
 import { useContext } from 'react'
 import InteractorContext from '../../../context'
 
-const Container = styled.div({
-  width: 375,
-  height: '100%',
-  borderLeft: '1px solid #DFE2E5'
-})
+const Container = styled.div`
+  width: 100%;
+  padding-top: 30px;
+`
 const ActiveFixture = styled.div({
-  height: 30,
+  height: 40,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -48,19 +47,17 @@ const ActiveFixture = styled.div({
 })
 
 export default function ActiveList ({ update }) {
-  const { fixtures, toggleFixture } = useContext(InteractorContext)
+  const { config, toggleFixture } = useContext(InteractorContext)
+  const { fixtures } = config
 
   function preventBubbleAndToggle(e, name) {
     e.stopPropagation()
     toggleFixture(name)
   }
   
-  const activeFixtures = fixtures.filter(f => f.active).sort(({order:a}, {order:b}) => a - b)
-  
   return (
     <Container>
-      <h2>Activated Fixtures</h2>
-      {activeFixtures.map(({ name }) => 
+      {fixtures.active.map(({ key: name }) => 
         <ActiveFixture key={name} onClick={() => update(name)}>
           {name}
           <button onClick={(e) => preventBubbleAndToggle(e, name)}>Deactivate</button>

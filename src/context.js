@@ -5,49 +5,42 @@ const InteractorContext = createContext({})
 
 export function InteractorContextProvider ({ children }) {
   const [initialized, setInitialized] = useState(false)
-  const [fixtures, setFixtures] = useState([])
-  const [endpoints, setEndpoints] = useState([])
-  const [state, setState] = useState({})
+  const [ config, setConfig ] = useState({})
 
   useEffect(() => {
-    getStatus()
-    window.onfocus = () => getStatus()
+    getConfig()
+    window.onfocus = () => getConfig()
     return () => window.onfocus = null
   }, [])
 
-  async function getStatus () {
-    const response = await fetch('/__interactor/getStatus')
-    const { fixtures, endpoints, state } = await response.json()
-    setFixtures(fixtures)
-    setEndpoints(endpoints)
-    setState(state)
+  async function getConfig () {
+    const response = await fetch('/__interactor/getConfig')
+    setConfig(await response.json())
     if (!initialized) { setInitialized(true) }
   }
   
   async function setModifier (modifier) {
-    const endpoint = typeof modifier.enabled !== 'undefined' ? 'setEndpointEnabled' : 'setModifier'
-    if (typeof modifier.method === 'undefined') { delete modifier.method }
-    await fetch(`/__interactor/${endpoint}`, {
+    await fetch(`/__interactor/setModifier`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(modifier)
     })
-    await getStatus()
+    await getConfig()
   }
 
   async function toggleFixture (name) {
-    const current = fixtures.find(f => f.name === name).active
-    const endpoint = !current ? '/__interactor/activateFixture' : '/__interactor/deactivateFixture'
+    const currentlyActive = config.fixtures.active.find(f => f.key === name)
+    const endpoint = !currentlyActive ? '/__interactor/activateFixture' : '/__interactor/deactivateFixture'
     await fetch(endpoint, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ name })
     })
-    await getStatus()
+    await getConfig()
   }
 
   return (
-    <InteractorContext.Provider value={{ endpoints, fixtures, state, getStatus, toggleFixture, setModifier }}>
+    <InteractorContext.Provider value={{ config, getConfig, toggleFixture, setModifier }}>
       {initialized ? children : <Initializing />}
     </InteractorContext.Provider>
   )

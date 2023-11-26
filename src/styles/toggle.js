@@ -45,8 +45,8 @@ export default function ToggleStyles () {
           }
 
           .react-toggle-track {
-            width: 50px;
-            height: 24px;
+            width: 22px;
+            height: 11px;
             padding: 0;
             border-radius: 30px;
             background-color: #4D4D4D;
@@ -69,6 +69,7 @@ export default function ToggleStyles () {
 
           .react-toggle-track-check {
             position: absolute;
+            display: none;
             width: 14px;
             height: 10px;
             top: 0px;
@@ -92,6 +93,7 @@ export default function ToggleStyles () {
 
           .react-toggle-track-x {
             position: absolute;
+            display: none;
             width: 10px;
             height: 10px;
             top: 0px;
@@ -115,8 +117,8 @@ export default function ToggleStyles () {
             position: absolute;
             top: 1px;
             left: 1px;
-            width: 22px;
-            height: 22px;
+            width: 9px;
+            height: 9px;
             border: 1px solid #4D4D4D;
             border-radius: 50%;
             background-color: #FAFAFA;
@@ -131,7 +133,7 @@ export default function ToggleStyles () {
           }
 
           .react-toggle--checked .react-toggle-thumb {
-            left: 27px;
+            left: 12px;
             border-color: #19AB27;
           }
 

@@ -1,29 +1,31 @@
 import { useContext, useState } from 'react'
 import InteractorContext from '../../context'
-import Section from '../common/Section'
 import FixtureNavigation from './Navigation'
-import FixtureContent from './Content'
+import styled from '@emotion/styled'
+import ActiveList from './Content/ActiveList'
+import FixtureDetails from './Content/FixtureDetails'
+
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+`
 
 export default function Fixtures () {
-  const { fixtures } = useContext(InteractorContext)
+  const { config } = useContext(InteractorContext)
+  const { fixtures } = config
   if (fixtures && fixtures.length === 0) { return }
-  const [selectedFixtureName, setSelectedFixtureName] = useState(fixtures[0].name)
+  const [selectedFixtureName, setSelectedFixtureName] = useState(fixtures.collection[0].name)
   
   return (
-    <Section
-      heading='Fixtures'
-      navigation={
-        <FixtureNavigation
-          selectedFixtureName={selectedFixtureName}
-          update={setSelectedFixtureName}
-        />
-      }
-      content={
-        <FixtureContent
-          selectedFixture={fixtures.find(f => f.name === selectedFixtureName)}
-          update={setSelectedFixtureName}
-        />
-      }
-    />
+    <Container>
+      <FixtureNavigation
+        selectedFixtureName={selectedFixtureName}
+        update={setSelectedFixtureName}
+      />
+      <FixtureDetails 
+        selectedFixture={fixtures.collection.find(f => f.name === selectedFixtureName)}
+        update={setSelectedFixtureName}
+      />
+    </Container>
   )
 }

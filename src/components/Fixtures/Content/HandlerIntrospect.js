@@ -1,34 +1,31 @@
 import styled from '@emotion/styled'
-import { useContext } from 'react'
-import { IntrospectModalContext } from '../../IntrospectModal/IntrospectModalContext'
 import Highlight from 'react-highlight'
 
-const Container = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  margin: '0 15px 15px 15px',
-  border: '1px solid #DFE2E5'
-})
-const Heading = styled.div({
-  display: 'flex',
-  flexGrow: 1,
-  padding: '0 10px',
-  alignItems: 'center',
-  height: 25,
-  fontSize: 14,
-  fontWeight: 700,
-  background: '#222',
-  color: '#EEE'
-})
+const Container = styled.div`
+  display: flex;
+  margin: 0px 15px 15px 15px;
+  :not(:first-of-type) {
+    border-top: 1px solid #EDEDED;
+    padding-top: 50px;
+  }
+`
 
+const HeadingBox = styled.div`
+  width: 275px;
+  h3 {
+    font-size: 20px;
+    font-weight: 300;
+  }
+`
 const MetaBox = styled.div({
   display: 'flex',
-  padding: '0 20px',
+  width: 200,
+  flexDirection: 'column',
   '>div': {
     display: 'flex',
     flexDirection: 'column',
     flexBasis: '25%',
-    padding: '10px 0',
+    marginBottom: 50,
     '&:last-of-type': {
       justifyContent: 'center',
       ' button': {
@@ -49,56 +46,42 @@ const MetaBox = styled.div({
   }
 })
 
-const InlineAction = styled.div({
-  ' code': {
-    fontSize: 18,
-    lineHeight: '20px'
-  }
-})
 
-const InspectRedirectPrompt = styled.div({
-  background: '#CCC',
-  color: '#444',
-  height: 50,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: 14,
-  fontWeight: 400
-})
-export default function HanderIntrospect({operationName, path, method, payload, mode, handler}) {
-  const { activateIntrospect } = useContext(IntrospectModalContext)
+const SnippetBox = styled.div`
+  code {
+    font-size: 16px;
+    line-height: 20px;
+  }
+`
+
+export default function HanderIntrospect({operationName, path, method, payload, mode = 'Merge', handler}) {
   const heading = operationName ? operationName : `${method} ${path}`
   let action = handler ? handler : payload
   action = typeof action === 'string' ? action : JSON.stringify(action, null, 2)
-  const showActionInline = (action.match(/\n/g) || []).length <= 10
   
   return (
     <Container>
-      <Heading>{heading}</Heading>
+      <HeadingBox>
+        <h3>{heading}</h3>
+      </HeadingBox>
       <MetaBox>
         <div>
-          <h3>Mode</h3>
+          <h4>Mode</h4>
           <span>{mode}</span>
         </div>
         <div>
-          <h3>Handler Type</h3>
+          <h4>Handler Type</h4>
           <span>{handler ? 'Function' : 'Payload'}</span>
         </div>
         <div>
-          <h3>Endpoint Type</h3>
+          <h4>Endpoint Type</h4>
           <span>{operationName ? 'Graph' : 'REST'}</span>
         </div>
-        <div>
-          <button onClick={() => activateIntrospect({heading, action})}>Inspect</button>
-        </div>
       </MetaBox>
-      <InlineAction>
-        {showActionInline
-          ? <Highlight className='javascript'>{action}</Highlight>
-          : <InspectRedirectPrompt>Code snippet is too large to show inline.  Use the inspect button to view.</InspectRedirectPrompt>
-        }
-      </InlineAction>
+      <SnippetBox>
+        <h4>Applies when active:</h4>
+        <Highlight className='javascript'>{action}</Highlight>
+      </SnippetBox>
     </Container>
   )
 }

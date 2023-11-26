@@ -1,15 +1,12 @@
 import './utils'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import {InteractorContextProvider} from './context'
 import Header from './components/Header'
 import Endpoints from './components/Endpoints'
 import Fixtures from './components/Fixtures'
-import IntrospectModalProvider from './components/IntrospectModal/IntrospectModalContext'
-import Modal from 'react-modal'
 import ToggleStyles from './styles/toggle'
-
-Modal.setAppElement('#root')
+import Nav from './components/Nav'
 
 const Content = styled.div({
   display: 'flex',
@@ -17,20 +14,19 @@ const Content = styled.div({
   maxWidth: 1400,
   padding: '0 10px',
   margin: '0 auto',
-  height: 'calc(100vh) - 160px'
+  height: 'calc(100vh) - 190px'
 })
 
 export default function App () {
+  const [activeTab, setActiveTab] = useState('endpoints')
   return (
     <InteractorContextProvider>
-      <IntrospectModalProvider>
-        <ToggleStyles />
-        <Header />
-        <Content>
-          <Endpoints />
-          <Fixtures />
-        </Content>
-      </IntrospectModalProvider>
+      <ToggleStyles />
+      <Header />
+      <Nav activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <Content>
+        {activeTab === 'endpoints' ? <Endpoints /> : <Fixtures />}
+      </Content>
     </InteractorContextProvider>
   )
 }

@@ -130,9 +130,6 @@ export default function CSSReset ({ children }) {
           },
           html {
             position: relative;
-          },
-          .hljs {
-            background: #222;
           }
         `}
       />

@@ -2,23 +2,24 @@ import styled from '@emotion/styled'
 import { useContext, useState } from 'react'
 import InteractorContext from '../../context'
 import TextInput from '../common/TextInput'
+import ActiveList from './Content/ActiveList'
 
 
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  width: '100%'
+  width: 400
 })
 
 const FixtureSelector = styled.div({
-  height: 50,
+  height: 60,
   width: '100%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  borderBottom: '1px solid #DFE2E5',
+  borderBottom: '1px solid #EDEDED',
   '&:first-of-type': {
-    borderTop: '1px solid #DFE2E5',
+    borderTop: '1px solid #EDEDED',
   },
   padding: '0 30px',
   cursor: 'pointer',
@@ -26,7 +27,7 @@ const FixtureSelector = styled.div({
     display: 'none'
   },
   ' h2': {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 300
   },
   '&:hover': {
@@ -53,16 +54,16 @@ const FixtureSelector = styled.div({
   },
 }, ({ selected }) => ({
   borderRight: selected ? '5px solid #444' : '',
-  background: selected ? '#F8F8F8' : 'white',
   ' h2': {
     fontWeight: selected ? 700 : 300
   }
 }))
 export default function FixtureNavigation ({ selectedFixtureName, update }) {
   const [filterCriteria, setFilterCriteria] = useState('')
-  const { fixtures, toggleFixture } = useContext(InteractorContext)
+  const { config, toggleFixture } = useContext(InteractorContext)
+  const { fixtures } = config
   const filterExp = new RegExp(RegExp.escape(filterCriteria), 'i')
-  const availableFixtures = fixtures.filter(f => !f.active && filterExp.test(f.name))
+  const availableFixtures = fixtures.collection.filter(f => typeof fixtures.active.find(({ key: name }) => name === f.name) === 'undefined' && filterExp.test(f.name))
   
   function preventBubbleAndToggle(e, name) {
     e.stopPropagation()
@@ -79,6 +80,7 @@ export default function FixtureNavigation ({ selectedFixtureName, update }) {
   
   return (
     <Container>
+      <ActiveList update={update}/>
       <TextInput onKeyUp={updateFilter} placeholder={'Filter by name'} />
       { availableFixtures.map(({ name }) => 
         <FixtureSelector

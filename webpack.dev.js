@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Appstrap = require('@appstrap/core')
+const Appstrap = require('../appstrap')
 
 module.exports = {
   entry: {

@@ -91,6 +91,7 @@ function getColor(buttonType, isActive) {
 }
 
 export default function EndpointHandler ({
+  isRestGroup,
   method,
   path,
   operationName,
@@ -105,8 +106,10 @@ export default function EndpointHandler ({
   const { setModifier } = useContext(InteractorContext)
   
   async function triggerSetModifier(property, value) {
-    const key = path || operationName
-    setModifier({ key, method, [property]: value })
+    const payload = isRestGroup
+      ? { key: path, method, [property]: value }
+      : { key: method, [property]: value }
+    setModifier(payload)
   }
   
   return (

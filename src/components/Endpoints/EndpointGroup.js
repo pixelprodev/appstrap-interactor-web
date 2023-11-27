@@ -26,6 +26,8 @@ const HandlerDetails = styled.div`
 `
 
 export default function EndpointGroup ({ path, matcher, ...handlers }) {
+  const isRestGroup = Object.keys(handlers).every(handler => ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'].includes(handler))
+
   return (
     <Container>
       <NameBox>
@@ -34,7 +36,7 @@ export default function EndpointGroup ({ path, matcher, ...handlers }) {
         </div>
       </NameBox>
       <HandlerDetails>
-        {Object.entries(handlers).map(([method, metadata]) => <EndpointHandler path={path} method={method} {...metadata} />)}
+        {Object.entries(handlers).map(([method, metadata]) => <EndpointHandler path={path} method={method} isRestGroup={isRestGroup} {...metadata} />)}
       </HandlerDetails>
     </Container>
   )

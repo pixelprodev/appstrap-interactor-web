@@ -19,27 +19,22 @@ const NameBox = styled.div`
   }
 `
 
-const IsGql = styled.div`
-
-`
-
 const HandlerDetails = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 `
 
-export default function EndpointGroup ({path, isGql, handlers}) {  
+export default function EndpointGroup ({ path, matcher, ...handlers }) {
   return (
     <Container>
       <NameBox>
         <div>
           <h1>{path}</h1>
-          {isGql && <IsGql />}
         </div>
       </NameBox>
       <HandlerDetails>
-        {handlers.map(handler => <EndpointHandler {...handler} />)}
+        {Object.entries(handlers).map(([method, metadata]) => <EndpointHandler path={path} method={method} {...metadata} />)}
       </HandlerDetails>
     </Container>
   )
